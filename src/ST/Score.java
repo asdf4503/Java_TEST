@@ -16,6 +16,7 @@ public class Score {
     public void setScore(int score){ this.score = score; }
     public int getScore() { return score; }
 
+    //점수를 입력했는지 확인하는 함수
     public void sccount() {
         if(score < 0) {
             System.out.println("점수를 입력하시오.");
