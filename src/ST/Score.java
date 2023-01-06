@@ -3,11 +3,14 @@ package ST;
 //점수클래스
 public class Score {
     int score = -1; //점수
+    String ID;
 
     //Score 클래스 기본생성자
-    public Score(int score) {
+    public Score(String ID, int score) {
+        this.ID = ID;
         this.score = score;
     }
+
 
     //Score 클래스 디폴트생성자
     public Score() { }
@@ -22,4 +25,15 @@ public class Score {
             System.out.println("점수를 입력하시오.");
         }
     }
+
+    
 }
+//학생 학번을 확인해서 존재하면 점수 리턴
+/*
+public int cheakScore(String str) {
+        if(str == ID){
+            return score;
+        }
+        return 0;
+    }
+ */

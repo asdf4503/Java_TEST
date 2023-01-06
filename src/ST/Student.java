@@ -5,16 +5,12 @@ public class Student {
     String ID; //학생학번
     String name; //학생이름
     String affiliation; //학생소속
-    Subject subject;
-    Score score;
 
     //Student 클래스 기본생성자
     public Student(String ID, String name, String affiliation) {
         this.ID = ID;
         this.name = name;
         this.affiliation = affiliation;
-        Subject subject = new Subject(ID);
-        Score score = new Score();
     }
 
     //Student 클래스 디폴트생성자

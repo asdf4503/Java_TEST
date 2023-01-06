@@ -3,17 +3,25 @@ package ST;
 //성적 클래스
 public class Grade extends Score{
     String grade;
+    int point;
+
+    //Grade 클래스 기본생성자
+    public Grade(int point) {
+      this.point = point;
+    }
+    
+    //Grade 클래스 디폴트 생성자
     public Grade() {  }
 
     //Score 클래스에서 점수를 받아와 성적을 매기는
-    public String getGrade(int point) {
+    public String getGrade() {
 
-        if (point > 90)     grade = "A";
-        else if(point > 80) grade = "B";
-        else if(point > 70) grade = "C";
-        else if(point > 60) grade = "D";
-        else                grade = "F";
-        return grade;
+        if (point > 89)     grade = "A"; //90점 이상이면 A
+        else if(point > 79) grade = "B"; //80점 이상이면 B
+        else if(point > 69) grade = "C"; //70점 이상이면 C
+        else if(point > 59) grade = "D"; //60점 이상이면 D
+        else                grade = "F"; //그 이하 F
+        return grade; //grade값 리턴
     }
 }
 
@@ -26,4 +34,4 @@ public class Grade extends Score{
             System.out.println("성적이 존재하지 않습니다.");
         }
     }
-    */
+*/
