@@ -1,10 +1,15 @@
 package ST;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 //학생클래스
 public class Student {
     String ID; //학생학번
     String name; //학생이름
     String affiliation; //학생소속
+    int check;
+    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
     //Student 클래스 기본생성자
     public Student(String ID, String name, String affiliation) {
@@ -26,15 +31,31 @@ public class Student {
     public String getName() { return name; }
     public String getAffiliation() { return affiliation; }
 
-    //학생을 입력했는지 확인하는 함수
-    public void stcount(){
-        if(ID == null || name == null || affiliation == null) {
-            System.out.println("학생이 없습니다.");
+
+    //관리자인지 학생인지 확인하는 함수
+    public String checking() throws IOException {
+        System.out.println("성적산출프로그램입니다.");
+        System.out.print("[1] 관리자 [2]학생 [3] 프로그램 종료 : ");
+        //모드 선택
+        check = Integer.parseInt(bf.readLine());
+        if(check == 1){ //관리자 모드라면
+            System.out.print("[1] 데이터 입력 [2] 데이터 확인 [3] 프로그램 종료 : ");
+            check = Integer.parseInt(bf.readLine()); //항목 선택
+            return String.valueOf(check); //입력 항목 번호 반환
+        }
+        else if(check == 2){ //학생 모드라면
+            System.out.print("학생의 이름을 입력해주세요. : ");
+            name = bf.readLine(); //이름 입력
+            return name; //이름값 반화
+
+        }
+        else if(check == 3){
+            System.out.println("프로그램을 종료합니다.");
+            return String.valueOf(0); //잘못된 접근의 경우 0반환
+        }
+        else { //관리자모드와 학생모드가 아닌 다른 모드 선택시
+            System.out.println("잘못된 접근입니다.\n" + "나가세요.");
+            return String.valueOf(0); //잘못된 접근의 경우 0반환
         }
     }
-
-    /*
-    public void showStudent(){
-        System.out.print();
-    }*/
 }

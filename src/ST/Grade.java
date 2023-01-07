@@ -1,9 +1,9 @@
 package ST;
 
 //성적 클래스
-public class Grade extends Score{
-    String grade;
-    int point;
+public class Grade{
+    String grade; //성적
+    int point; //점수
 
     //Grade 클래스 기본생성자
     public Grade(int point) {
@@ -24,7 +24,7 @@ public class Grade extends Score{
         return grade; //grade값 리턴
     }
 }
-
+//---------------------------------------------------------------------------------------
  /* 점수가 없으면 성적이 존재할 수 없다.
     Score 클래스에서 점수를 확인해줬기 떄문에 Grade 클래스 중복 확인해줄필요없음
 
