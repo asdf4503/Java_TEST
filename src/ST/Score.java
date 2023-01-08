@@ -18,6 +18,9 @@ public class Score {
     //설정자 && 접근자
     public void setScore(int score){ this.score = score; }
     public int getScore() { return score; }
+    public void print() {
+        System.out.print(score + " / ");
+    }
 }
 //---------------------------------------------------------------------------------------
 //학생 학번을 확인해서 존재하면 점수 리턴

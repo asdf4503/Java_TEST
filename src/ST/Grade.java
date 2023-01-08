@@ -23,6 +23,9 @@ public class Grade{
         else                grade = "F"; //그 이하 F
         return grade; //grade값 리턴
     }
+    public void print() {
+        System.out.print(grade);
+    }
 }
 //---------------------------------------------------------------------------------------
  /* 점수가 없으면 성적이 존재할 수 없다.

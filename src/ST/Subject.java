@@ -19,6 +19,9 @@ public class Subject {
     public void getID(String ID) { this.ID = ID; }
     public String getSubject() { return subject; }
 
+    public void print() {
+        System.out.print(subject + " / ");
+    }
 }
 //---------------------------------------------------------------------------------------
 //학생의 학번을 확인해서 존재하면 과목을 리턴
