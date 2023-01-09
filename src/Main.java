@@ -47,9 +47,9 @@ public class Main {
                     save = master.ProCheck(check);
                     System.out.println("-------------2022학년 성적-------------");
                     System.out.println("학번 / 이름 / 소속 / 과목명 / 점수 / 성적\n");
-                    if(save.equals("*")){
-                        while(reader.readLine() != null){
-                            System.out.println(reader.readLine());
+                    if(save.equals("all")){
+                        while((line = reader.readLine()) != null){
+                            System.out.println(line);
                         }
                     }
                     while((line = reader.readLine()) != null){
@@ -152,7 +152,8 @@ public class Main {
 
 /*
 
-
+System.out.print("잔디 심기");
+오늘은 일정으로 인한 휴식.
 
         studentList.add(new Student("20231111", "신짱구", "컴퓨터공학과"));
         studentList.add(new Student("20232222", "이훈이", "컴퓨터공학과"));
