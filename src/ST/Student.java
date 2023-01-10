@@ -1,14 +1,18 @@
 package ST;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 //학생클래스
 public class Student {
-    String ID; //학생학번
-    String name; //학생이름
-    String affiliation; //학생소속
-    int check;
+    private String ID; //학생학번
+    private String name; //학생이름
+    private String affiliation; //학생소속
+    private int check;
+    private ArrayList<Score> scoreList = new ArrayList<Score>(5);
+    Score score;
     BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
     //Student 클래스 기본생성자
@@ -16,6 +20,7 @@ public class Student {
         this.ID = ID;
         this.name = name;
         this.affiliation = affiliation;
+        this.scoreList = scoreList;
     }
 
     //Student 클래스 디폴트생성자
@@ -31,6 +36,17 @@ public class Student {
     public String getName() { return name; }
     public String getAffiliation() { return affiliation; }
 
+    public void plusscore(String subject, int point){
+        scoreList.add(new Score(subject, point));
+    }
+    public void comeData(){
+        System.out.print(scoreList.get(0).getSubject());
+        System.out.print(" / ");
+        System.out.print(scoreList.get(0).getScore());
+        System.out.print(" / ");
+        System.out.print(scoreList.get(0).getGrade());
+        System.out.println();
+    }
 
     //관리자인지 학생인지 확인하는 함수
     public String checking() throws IOException {
@@ -58,9 +74,5 @@ public class Student {
             System.out.println("잘못된 접근입니다.\n" + "나가세요.");
             return String.valueOf(0); //잘못된 접근의 경우 0반환
         }
-    }
-
-    public void print() {
-        System.out.print(ID + " / " + name + " / " + affiliation + " / ");
     }
 }

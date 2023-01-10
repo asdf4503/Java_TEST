@@ -46,7 +46,5 @@ public class Master {
             System.out.println("잘못된 접근입니다.");
             return String.valueOf(0);
         }
-
-        //하나의 입력이 끝난 경우 다시 항목 창으로 이동
     }
 }

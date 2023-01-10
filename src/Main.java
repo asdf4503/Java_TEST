@@ -2,13 +2,14 @@ import ST.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         String check;
         String save = null;
-        String save1;
-        String save2;
+        String save1 = null;
+        String save2 = null;
         int count = 0;
         int checking = 0;
         String ch;
@@ -18,21 +19,64 @@ public class Main {
         Student student = new Student();
         Master master = new Master();
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        BufferedReader reader = new BufferedReader(new FileReader("src/Information.txt"));
+        //BufferedReader reader = new BufferedReader(new FileReader("src/Information.txt"));
         File file = new File("src/Information.txt");
         FileWriter fileWriter = new FileWriter(file, true);
         BufferedWriter writer = new BufferedWriter(fileWriter);
 
         ArrayList<Student> studentList = new ArrayList<Student>();
-        ArrayList<Subject> subjectList = new ArrayList<Subject>();
-        ArrayList<Score> scoreList = new ArrayList<Score>();
-        ArrayList<Grade> gradeList = new ArrayList<Grade>();
 
         System.out.println("성적산출프로그램입니다.");
         System.out.println("본 프로그램은 컴퓨터공학과 학생의 성적을 산출하는 프로그램입니다.");
         System.out.println("\n");
 
-        while (true) {
+        roading(studentList); //기존 데이터 불러오기
+
+        
+
+    }
+    //로딩 메서드
+    public static void roading(ArrayList<Student> studentList) throws IOException {
+        String line = "";
+        int count = 0;
+
+        BufferedReader reader = new BufferedReader(new FileReader("src/Information.txt"));
+
+        while ((line = reader.readLine()) != null) {
+            StringTokenizer st = new StringTokenizer(line, " / ");
+                studentList.add(new Student(st.nextToken(), st.nextToken(), st.nextToken()));
+                studentList.get(count++).plusscore(st.nextToken(), Integer.parseInt(st.nextToken()));
+        }
+    }
+
+    //데이터 출력 메서드
+    public static void printAll(ArrayList<Student> studentList) {
+        for(int i = 0; i < studentList.size(); i++) {
+            System.out.print(studentList.get(i).getID());
+            System.out.print(" / ");
+            System.out.print(studentList.get(i).getName());
+            System.out.print(" / ");
+            System.out.print(studentList.get(i).getAffiliation());
+            System.out.print(" / ");
+            studentList.get(i).comeData();
+        }
+    }
+
+    //데이터 선택 출력 메서드
+    public static void printChoice(ArrayList<Student> studentList) throws IOException {
+        String line = "";
+        int i = 0;
+        BufferedReader reader = new BufferedReader(new FileReader("src/Information.txt"));
+        System.out.println("-------------2022년도 성적-------------");
+        System.out.println("학번 / 이름 / 소속 / 과목명 / 점수 / 성적\n");
+            while((line = reader.readLine()) != null){
+                if(line.contains(studentList.get(i++).getName()) == true) {
+                    System.out.println(line);
+                }
+            }
+    }
+}
+    /*while (true) {
             switch (check = student.checking()) {
                 case "1": //관리자 선택 (데이터입력을 선택한 경우)
                     if(login == false) {
@@ -47,14 +91,52 @@ public class Main {
                     save = master.ProCheck(check);
                     System.out.println("-------------2022학년 성적-------------");
                     System.out.println("학번 / 이름 / 소속 / 과목명 / 점수 / 성적\n");
-                    if(save.equals("all")){
-                        while((line = reader.readLine()) != null){
-                            System.out.println(line);
+                    if(checking == 0){
+                        if(save.equals("all")){
+                            while((line = reader.readLine()) != null){
+                                System.out.println(line);
+                            }
                         }
+                        while((line = reader.readLine()) != null){
+                            if(line.contains(save) == true) {
+                                System.out.println(line);
+                            }
+                        }
+                        checking++;
                     }
-                    while((line = reader.readLine()) != null){
-                        if(line.contains(save) == true) {
-                            System.out.println(line);
+                    else {
+                        if(save.equals("all")) {
+                            for(int i = 0; i < studentList.size(); i++) {
+                                //메소드화 시켜야됨.
+                                System.out.print(studentList.get(i).getID());
+                                System.out.print(" / ");
+                                System.out.print(studentList.get(i).getName());
+                                System.out.print(" / ");
+                                System.out.print(studentList.get(i).getAffiliation());
+                                System.out.print(" / ");
+                                System.out.print(subjectList.get(i).getSubject());
+                                System.out.print(" / ");
+                                System.out.print(scoreList.get(i).getScore());
+                                System.out.print(" / ");
+                                System.out.print(scoreList.get(i).getGrade());
+                            }
+                        }
+                        else {
+                            for(int i = 0;i < studentList.size();i++){
+                                if(save.equals(studentList.get(i).getName())) {
+                                    System.out.print(studentList.get(i).getID());
+                                    System.out.print(" / ");
+                                    System.out.print(studentList.get(i).getName());
+                                    System.out.print(" / ");
+                                    System.out.print(studentList.get(i).getAffiliation());
+                                    System.out.print(" / ");
+                                    System.out.print(subjectList.get(i).getSubject());
+                                    System.out.print(" / ");
+                                    System.out.print(scoreList.get(i).getScore());
+                                    System.out.print(" / ");
+                                    System.out.print(scoreList.get(i).getGrade());
+                                }
+                            }
                         }
                     }
                     System.out.println("\n");
@@ -117,10 +199,10 @@ public class Main {
                     System.out.print("점수를 입력하시오. : ");
                     save = bf.readLine();
                     scoreList.add(new Score(Integer.parseInt(save)));
-                    gradeList.add(new Grade(scoreList.get(count).getScore()));
+                    scoreList.add(new Score(scoreList.get(count).getScore()));
                     writer.write(String.valueOf(scoreList.get(count).getScore()));
                     writer.write(" / ");
-                    writer.write(gradeList.get(count).getGrade());
+                    writer.write(scoreList.get(count).getGrade());
                     writer.write("\n");
                     count++;
 
@@ -138,79 +220,5 @@ public class Main {
             }
             if (save.equals("4")) break;
         }
-        writer.close();
-    }
-   /* public void fileCheck() {
-        writer.write(studentList.get(count).getID());
-        writer.write(" / ");
-        writer.write(studentList.get(count).getName());
-        writer.write(" / ");
-        writer.write(studentList.get(count).getAffiliation());
-        writer.write(" / ");
-    }*/
-}
-
-/*
-
-System.out.print("잔디 심기");
-오늘은 일정으로 인한 휴식.
-
-        studentList.add(new Student("20231111", "신짱구", "컴퓨터공학과"));
-        studentList.add(new Student("20232222", "이훈이", "컴퓨터공학과"));
-        studentList.add(new Student("20233333", "한유리", "컴퓨터공학과"));
-        studentList.add(new Student("20234444", "김철수", "컴퓨터공학과"));
-
-        subjectList.add(new Subject("20230000", "자바프로그래밍"));
-        subjectList.add(new Subject("20231111", "C++프로그래밍"));
-        subjectList.add(new Subject("20232222", " 웹프로그래밍 "));
-        subjectList.add(new Subject("20233333", " 데이터베이스 "));
-        subjectList.add(new Subject("20234444", "컴퓨터네트워크"));
-
-        scoreList.add(new Score("20230000", 95));
-        scoreList.add(new Score("20231111", 90));
-        scoreList.add(new Score("20232222", 95));
-        scoreList.add(new Score("20233333", 90));
-        scoreList.add(new Score("20234444", 95));
-
-        gradeList.add(new Grade(scoreList.get(0).getScore()));
-        gradeList.add(new Grade(scoreList.get(1).getScore()));
-        gradeList.add(new Grade(scoreList.get(2).getScore()));
-        gradeList.add(new Grade(scoreList.get(3).getScore()));
-        gradeList.add(new Grade(scoreList.get(4).getScore()));
-
-System.out.println("                        성적산출프로그램                        ");
-            System.out.println("-------------------------------------------------------------");
-            System.out.println("|  학   번  | 이  름 |  소    속  |   과    목   | 점 수 | 성 적 |");
-            System.out.println("-------------------------------------------------------------");
-
-            for (int i = 0; i < studentList.size(); i++) {
-                System.out.print("| ");
-                System.out.print(studentList.get(i).getID());
-                System.out.print(" | ");
-                System.out.print(studentList.get(i).getName());
-                System.out.print(" | ");
-                System.out.print(studentList.get(i).getAffiliation());
-                System.out.print(" | ");
-                System.out.print(subjectList.get(i).getSubject());
-                System.out.print(" |  ");
-                System.out.print(scoreList.get(i).getScore());
-                System.out.print("  |   ");
-                System.out.print(gradeList.get(i).getGrade());
-                System.out.print("   |\n");
-            }
-            System.out.println("--------------------------------------------------------------");
-
-            for (int i = 0; i < studentList.size(); i++) {
-                        if (check.equals(studentList.get(i).getName())) {
-                            System.out.print(studentList.get(i).getID() + " / ");
-                            System.out.print(studentList.get(i).getName() + " / ");
-                            System.out.print(studentList.get(i).getAffiliation() + " / ");
-                            System.out.print(subjectList.get(i).getSubject() + " / ");
-                            System.out.print(scoreList.get(i).getScore() + " / ");
-                            System.out.print(gradeList.get(i).getGrade() + "\n");
-                        }
-                    }
-                    for(int i = 0;i < studentList.size();i++) {
-                        System.out.println("[" + studentList.get(i).getName() + "]");
-                    }
- */
+        //writer.close();
+     */

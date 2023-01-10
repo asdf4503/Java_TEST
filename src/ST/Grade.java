@@ -15,7 +15,6 @@ public class Grade{
 
     //Score 클래스에서 점수를 받아와 성적을 매기는
     public String getGrade() {
-
         if (point > 89)     grade = "A"; //90점 이상이면 A
         else if(point > 79) grade = "B"; //80점 이상이면 B
         else if(point > 69) grade = "C"; //70점 이상이면 C

@@ -7,7 +7,6 @@ public class Subject {
 
     //Subject 클래스 기본생성자
     public Subject(String subject) {
-        //this.ID = ID;
         this.subject = subject;
     }
 
