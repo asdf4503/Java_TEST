@@ -3,11 +3,13 @@ package ST;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 //교수 클래스
 public class Master {
     String ProPw; //
     String check;
+    int checking;
     BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     public Master() { } //관리자 클래스 디폴트 생성자
 
@@ -26,17 +28,32 @@ public class Master {
         }
         return true;
     }
-
+    public String checkingMaster() throws IOException {
+        System.out.print("[1] 데이터 입력 [2] 데이터 확인 [3] 프로그램 종료 : ");
+        checking = Integer.parseInt(bf.readLine()); //항목 선택
+        System.out.println("\n");
+        if (checking == 3) { //프로그램 종료를 선택한 경우
+            System.out.println("프로그램을 종료합니다.");
+            return "종료"; //프로그램 종료
+        }
+        return String.valueOf(checking); //입력 항목 번호 반환
+    }
     //관리자모드 함수
-    public String ProCheck(String ck) throws IOException {
-        if(ck.equals("1")){ //처음 접근할떄 성적 입력을 선택한 경우
-            System.out.println("항목을 선택하시오.");
-            System.out.print("[1] 학생 입력 [2] 과목 입력 [3] 점수 입력 : ");
+    public String ProCheck(String ck, ArrayList<Student> studentList) throws IOException {
+        if(ck.equals("1")){ //데이터 입력을 선택한 경우
+            //기존에 있는 학생인지 신규학생인지 확인
+            System.out.print("[1] 기존 학생 [2] 신규 학생 : ");
             check = bf.readLine();
             System.out.println("\n");
             return check;
         }
-        else if(ck.equals("2")) { //성적 확인을 선택한 경우
+        else if(ck.equals("2")) { //데이터 확인을 선택한 경우
+            System.out.println("--------------");
+            for(int i = 0; i < studentList.size();i++){
+                System.out.println(studentList.get(i).getName());
+            }
+            System.out.println("--------------\n");
+            System.out.println();
             System.out.print("확인하고 싶은 학생 이름을 입력하시오. : ");
             check = bf.readLine();
             System.out.println("\n");
