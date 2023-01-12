@@ -15,8 +15,9 @@ public class Master {
 
     public boolean Login() throws IOException{
         String propw = "super"; //관리자 번호
-        System.out.print("관리자 번호를 입력하시오. : ");
+        System.out.print("\n관리자 번호를 입력하시오. : ");
         ProPw = bf.readLine(); //관리자 번호입력
+        System.out.println("");
         if(propw.equals(ProPw)){ //관리자 번호를 제대로 입력한 경우
             System.out.println("관리자 서버 접속 성공");
             System.out.println("\n");

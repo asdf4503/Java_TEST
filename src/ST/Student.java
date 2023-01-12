@@ -74,7 +74,7 @@ public class Student {
         if (check == 1) return String.valueOf(check); //관리자모드
         if (check == 2) return String.valueOf(check); //학생 모드
         else if (check == 3) {
-            System.out.println("프로그램을 종료합니다.");
+            System.out.println("\n프로그램을 종료합니다.");
             return "종료"; //프로그램 종료
         } else { //관리자모드와 학생모드가 아닌 다른 모드 선택시
             System.out.println("잘못된 접근입니다.\n" + "나가세요.\n");
@@ -96,16 +96,20 @@ public class Student {
 
     public void SubjectData() {
         for(int i = 0;i < scoreList.size();i++)
-            System.out.println(scoreList.get(i).getSubject());
+            System.out.print(scoreList.get(i).getSubject());
     }
 
-    public ArrayList<Score> backupinputdata(int backupcount){
+    //백업데이터 불러오기
+    public String backupinputdata(int loadcount) {
+        String[] backupdata = new String[3];
+        String findata = "";
+
         for(int i = 0;i < scoreList.size();i++) {
-            scoreList.get(i).getSubject();
-            scoreList.get(i).getScore();
-            scoreList.get(i).getGrade();
+            backupdata[i] = scoreList.get(i).getSubject();
+            backupdata[i+1] = String.valueOf(scoreList.get(i).getScore());
+            backupdata[i+2] = scoreList.get(i).getGrade();
         }
-        return scoreList;
+        findata = String.join(" / ", backupdata);
+        return findata;
     }
-
 }
