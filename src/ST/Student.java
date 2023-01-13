@@ -54,10 +54,12 @@ public class Student {
         return affiliation;
     }
 
+    //과목, 점수, 등급을 입력받아 scoreList에 입력하는 메서드
     public void plusScore(String subject, int point, String grade) {
         scoreList.add(new Score(subject, point, grade));
     }
 
+    //scoreList를 출력하는 메서드
     public void comeData() {
         System.out.print(scoreList.get(0).getSubject());
         System.out.print(" / ");
@@ -83,7 +85,7 @@ public class Student {
         }
     }
 
-
+    //학생모드를 체크하는 메서드
     public String checkingStudent() throws IOException {
         if (check == 2) { //학생 모드라면
             System.out.print("학생의 이름을 입력해주세요. : ");
@@ -94,6 +96,7 @@ public class Student {
         return null;
     }
 
+    //수강과목을 출력하는 메서드
     public void SubjectData() {
         for(int i = 0;i < scoreList.size();i++)
             System.out.print(scoreList.get(i).getSubject());
