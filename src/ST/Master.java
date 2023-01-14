@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 //관리자 클래스
 public class Master {
-    String ProPw; //관리자 번호
-    String check; //항목선택
-    int checking; //항목선택
+    private String ProPw; //관리자 번호
+    private String check; //항목선택
+    private int checking; //항목선택
     BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     public Master() { } //관리자 클래스 디폴트 생성자
 

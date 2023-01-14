@@ -13,7 +13,7 @@ public class Student {
     private int check;
     private String grade;
     private ArrayList<Score> scoreList = new ArrayList<Score>(5);
-    Score score;
+    private Score score;
     BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
     //Student 클래스 기본생성자

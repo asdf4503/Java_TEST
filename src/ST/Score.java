@@ -2,10 +2,10 @@ package ST;
 
 //점수클래스
 public class Score {
-    int score = -1; //점수
-    String ID; //학번
-    String grade; //성적
-    String subject;
+    private int score = -1; //점수
+    private String ID; //학번
+    private String grade; //성적
+    private String subject;
 
 
     //Score 클래스 기본생성자
