@@ -43,19 +43,24 @@ public class Management {
                     login = master.Login(); //관리자 모드 로그인
                     if(login == false) break; //로그인 실패시 프로그램 종료
                 }
-                //데이터 입력(1) / 확인(2) /프로그램 종료(3) save에 저장
+                //데이터 입력(1) / 확인(2) / 삭제(3) / 프로그램 종료(4) save에 저장
                 save = master.checkingMaster();
-                if (save.equals("종료")) break; //프로그램 종료(3)을 선택한 경우
+                if (save.equals("종료")) break; //프로그램 종료(4)을 선택한 경우
                 save1 = master.ProCheck(save, studentList); //데이터 입력 / 확인 처리
-                if(save.equals("1")){
+                if(save.equals("1")) {
                     Write(studentList, save1, loadcount); //1이면 데이터 입력
                     save2 = exit();
                 }
                 //2번이면 데이터 확인 (학생이름으로 데이터 출력)
-                if (save.equals("2")){
+                if (save.equals("2")) {
                     if(save1.equals("all"))     printAll(studentList);
                     else                        printChoice(studentList, save1);
                     System.out.println();
+                    save2 = exit();
+                }
+                //3번이면 데이터 삭제
+                if(save.equals("3")) {
+                    Delete(studentList);
                     save2 = exit();
                 }
             } else { //학생 모드를 선택한 경우
@@ -220,5 +225,43 @@ public class Management {
         writer.write(studentList.get(loadcount).backupinputdata(loadcount));
         writer.write("\n");
         writer.close();
+    }
+
+    //데이터 삭제 메소드
+    public static void Delete(ArrayList<Student> studentList) throws IOException {
+        String name = null;
+        String check = null;
+        BufferedReader reader = new BufferedReader(new FileReader("src/Information.txt"));
+        File file = new File("src/Information.txt");
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("--------------");
+        for(int i = 0; i < studentList.size();i++){
+            System.out.println(studentList.get(i).getName());
+        }
+        System.out.println("--------------\n");
+        System.out.println();
+
+        System.out.print("삭제할 학생의 이름을 입력하시오. : ");
+        name = bf.readLine();
+        for(int i = 0;i <= studentList.size();i++) {
+            if(name.equals("all")){
+                file.delete();
+                System.out.println("데이터가 전부 삭제 되었습니다.");
+                break;
+            }
+            else if(name.equals(studentList.get(i).getName())) {
+                System.out.print("해당 데이터를 삭제 하시겠습니까? Y/N ");
+                check = bf.readLine();
+                if(check.equals("Y")) {
+                    //데이터삭제
+                    System.out.println(studentList.get(i).getName() + "의 데이터를 삭제합니다.");
+                    break;
+                }
+            }
+            else{
+                break;
+            }
+        }
     }
 }

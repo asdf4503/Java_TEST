@@ -32,14 +32,14 @@ public class Master {
     }
     //관리자 모드 항복 선택하는 메서드
     public String checkingMaster() throws IOException {
-        System.out.print("[1] 데이터 입력 [2] 데이터 확인 [3] 프로그램 종료 : ");
-        checking = Integer.parseInt(bf.readLine()); //3개의 항목 선택
+        System.out.print("[1] 데이터 입력 [2] 데이터 확인 [3] 데이터 삭제 [4] 프로그램 종료 : ");
+        checking = Integer.parseInt(bf.readLine()); //4개의 항목 선택
         System.out.println("\n");
-        if (checking == 3) { //프로그램 종료를 선택한 경우
+        if (checking == 4) { //프로그램 종료를 선택한 경우
             System.out.println("프로그램을 종료합니다.");
             return "종료"; //프로그램 종료
         }
-        return String.valueOf(checking); //입력 항목 번호 반환(1, 2)
+        return String.valueOf(checking); //입력 항목 번호 반환(1, 2, 3)
     }
     
     //항목을 받아와서 관리자모드의 기능을 수행하는 메서드
@@ -61,6 +61,9 @@ public class Master {
             System.out.print("확인하고 싶은 학생 이름을 입력하시오. : ");
             check = bf.readLine();
             System.out.println("\n");
+            return check;
+        }
+        else if(ck.equals("3")) {
             return check;
         }
         else { //잘못된 접근일 경우

@@ -13,5 +13,3 @@ public class Main {
         management.start(studentList, loadcount);
     }
 }
-//TEST
-//TEST2 go
