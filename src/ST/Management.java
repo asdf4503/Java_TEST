@@ -246,7 +246,7 @@ public class Management {
         name = bf.readLine();
         for(int i = 0;i <= studentList.size();i++) {
             if(name.equals("all")){
-                file.delete();
+
                 System.out.println("데이터가 전부 삭제 되었습니다.");
                 break;
             }
@@ -256,6 +256,7 @@ public class Management {
                 if(check.equals("Y")) {
                     //데이터삭제
                     System.out.println(studentList.get(i).getName() + "의 데이터를 삭제합니다.");
+
                     break;
                 }
             }
